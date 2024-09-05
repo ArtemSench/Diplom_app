@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Загруженные вами изображения</h2>
+<a href="{% url 'upload_image' %}" class="btn btn-primary">Загрузить новое изображение</a>
+<div class="row mt-3">
+    {% for image in images %}
+        <div class="col-md-4">
+            <h4>{{ image.result }} ({{ image.confidence|floatformat:2 }})</h4>
+            <a href="{{ image.image.url }}" target="_blank"><img src="{{ image.image.url }}" class="img-fluid" alt="Uploaded Image">
+            </a>
+        </div>
+    <form action="{% url 'delete_image' image.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+    {% endfor %}
+</div>
+{% endblock %}
