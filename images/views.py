@@ -13,7 +13,7 @@ def home(request):
 
 def logout_view(request):
     logout(request)  # Выход пользователя
-    return redirect('home')  # Перенаправление на страницу входа (или на другую страницу)
+    return redirect('home')  # Перенаправление на домашнюю страницу
 
 # Загрузка модели
 def load_model():
@@ -83,7 +83,7 @@ def delete_image(request, image_id):
     image = get_object_or_404(UploadedImage, id=image_id)
     if request.method == 'POST':
         image.delete()
-        return redirect('dashboard')  # Замените 'image_list' на имя вашего URL для списка изображений
+        return redirect('dashboard')  # перенаправление на главноую страницу с изображениями пользователя
     return render(request, 'confirm_delete.html', {'image': image})
 
 
